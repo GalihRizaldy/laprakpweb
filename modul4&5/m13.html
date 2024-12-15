@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Array</title>
+</head>
+
+<body>
+
+  <script>
+    // Deklarasi array
+    let buah = ["anggur", "apel", "jeruk", "mangga"];
+    buah[6] = "semangka"; // Menambahkan elemen pada indeks ke-4
+
+    document.write("Buah-Buahan: <br>");
+    document.write("0: " + (buah[0] || "Tidak ada") + "<br>");
+    document.write("1: " + (buah[1] || "Tidak ada") + "<br>");
+    document.write("2: " + (buah[2] || "Tidak ada") + "<br>");
+    document.write("3: " + (buah[3] || "Tidak ada") + "<br>");
+    document.write("4: " + (buah[4] || "Tidak ada") + "<br>");
+    
+    // Menampilkan elemen array dengan perulangan
+    document.write("<br><br>Buah-buahan dengan for: <br>");
+    for (let i = 0; i < buah.length; i++) {
+      document.write(i + ": " + (buah[i] || "Tidak ada") + "<br>");
+    }
+
+    // Memodifikasi array
+    buah[3] = ""; // Mengosongkan nilai pada indeks ke-3
+    buah[2] = "kedongdong"; // Mengubah nilai pada indeks ke-2
+
+    // Menampilkan array yang dimodifikasi
+    document.write("<br><br>Sekarang Buah-Buahan: <br>");
+    for (let i = 0; i < buah.length; i++) {
+      document.write(i + ": " + (buah[i] || "Tidak ada") + "<br>");
+    }
+  </script>
+
+</body>
+
+</html>

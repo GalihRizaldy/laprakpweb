@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Switch Case JavaScript</title>
+</head>
+
+<body>
+
+  <script>
+    let nilai = 80;
+    let nh;
+
+    switch (true) {
+      case (nilai >= 81 && nilai <= 100):
+        nh = "A";
+        break;
+
+      case (nilai >= 75 && nilai <= 80):
+        nh = "AB";
+        break;
+
+      case (nilai >= 69 && nilai < 75):
+        nh = "B";
+        break;
+
+      case (nilai >= 63 && nilai < 69):
+        nh = "BC";
+        break;
+
+      case (nilai >= 57 && nilai < 63):
+        nh = "C";
+        break;
+
+      case (nilai >= 51 && nilai < 57):
+        nh = "CD";
+        break;
+
+      case (nilai >= 45 && nilai < 51):
+        nh = "D";
+        break;
+
+      default:
+        nh = "E";
+        break;
+    }
+
+    document.write("Nilai Anda = " + nh);
+  </script>
+
+</body>
+
+</html>

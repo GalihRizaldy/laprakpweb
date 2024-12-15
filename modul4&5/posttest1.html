@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perhitungan Gaji</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 300px;
+      margin-top: 20px;
+    }
+
+    td {
+      padding: 10px;
+    }
+
+    #output {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Perhitungan Gaji</h1>
+
+  <form>
+    <table border="1">
+      <tr>
+        <td><label for="golongan">Golongan</label></td>
+        <td>
+          <select id="golongan">
+            <option value="I">I</option>
+            <option value="II">II</option>
+            <option value="III">III</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td><label for="jumlahAnak">Jumlah Anak</label></td>
+        <td><input type="number" id="jumlahAnak" min="0" /></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <button type="button" onclick="hitungGaji()">Hitung</button>
+          <button type="reset">Cancel</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    function hitungGaji() {
+      const golongan = document.getElementById('golongan').value;
+      const jumlahAnak = parseInt(document.getElementById('jumlahAnak').value) || 0;
+      let gajiPokok, persenTunjangan;
+
+      // Menentukan gaji pokok dan persentase tunjangan berdasarkan golongan
+      if (golongan === "I") {
+        gajiPokok = 250000;
+        persenTunjangan = 0.05;
+      } else if (golongan === "II") {
+        gajiPokok = 300000;
+        persenTunjangan = 0.10;
+      } else if (golongan === "III") {
+        gajiPokok = 350000;
+        persenTunjangan = 0.15;
+      }
+
+      // Menghitung tunjangan dan gaji bersih
+      const tunjangan = (jumlahAnak * gajiPokok) * persenTunjangan;
+      const gajiBersih = gajiPokok + tunjangan;
+
+      // Menampilkan hasil
+      document.getElementById('output').innerHTML = `
+        <table border="1">
+          <tr>
+            <td><strong>Gaji Pokok</strong></td>
+            <td>${gajiPokok.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
+          </tr>
+          <tr>
+            <td><strong>Tunjangan</strong></td>
+            <td>${tunjangan.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
+          </tr>
+          <tr>
+            <td><strong>Gaji Bersih</strong></td>
+            <td>${gajiBersih.toLocaleString('id-ID', { style: 'currency', currency: 'IDR' })}</td>
+          </tr>
+        </table>
+      `;
+    }
+  </script>
+
+</body>
+
+</html>
