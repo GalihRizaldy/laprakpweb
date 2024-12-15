@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manipulasi DOM dengan jQuery</title>
+
+
+  <script src="js/jquery-3.7.1.min.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      $("#ubah").click(function () {
+
+        $("#fakultas").text("fakultas ilmu komputer");
+
+        $("#universitas").val("universitas kuningan");
+      });
+    });
+  </script>
+</head>
+
+<body>
+
+
+
+  <div id="fakultas">fkom</div>
+  <input type="text" id="universitas" value="uniku">
+
+  <button id="ubah">Ubah Data</button>
+
+  
+
+</body>
+
+</html>

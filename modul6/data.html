@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Pemesanan Kamar</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 10px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin: 4px 0;
+    }
+
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+
+    .resume {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Form Pemesanan Kamar</h1>
+  <form id="pemesananForm">
+    <table border="1">
+      <tr>
+        <td>Nama Pemesan</td>
+        <td><input type="text" id="namaPemesan" required></td>
+      </tr>
+      <tr>
+        <td>Jenis Kelamin</td>
+        <td>
+          <select id="jenisKelamin">
+            <option value="Laki-Laki">Laki-Laki</option>
+            <option value="Perempuan">Perempuan</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Nomor Identitas</td>
+        <td>
+          <input type="text" id="nomorIdentitas" maxlength="16">
+          <span class="error" id="errorIdentitas"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Tipe Kamar</td>
+        <td>
+          <select id="tipeKamar">
+            <option value="Standar" data-harga="500000">Standar - Rp 500.000</option>
+            <option value="Deluxe" data-harga="700000">Deluxe - Rp 700.000</option>
+            <option value="Family" data-harga="1000000">Family - Rp 1.000.000</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Harga</td>
+        <td><input type="text" id="harga" readonly></td>
+      </tr>
+      <tr>
+        <td>Tanggal Pesan</td>
+        <td><input type="text" id="tanggalPesan" placeholder="dd/mm/yyyy"></td>
+      </tr>
+      <tr>
+        <td>Durasi Menginap (hari)</td>
+        <td>
+          <input type="text" id="durasiMenginap">
+          <span class="error" id="errorDurasi"></span>
+        </td>
+      </tr>
+      <tr>
+        <td>Termasuk Breakfast</td>
+        <td><input type="checkbox" id="breakfast"> Ya</td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <button type="button" id="simpan">Simpan</button>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+  <div class="resume" id="resume" style="display: none;">
+    <h2>Resume Pemesanan</h2>
+    <p>Nama Pemesan: <span id="resNama"></span></p>
+    <p>Nomor Identitas: <span id="resIdentitas"></span></p>
+    <p>Jenis Kelamin: <span id="resKelamin"></span></p>
+    <p>Tipe Kamar: <span id="resKamar"></span></p>
+    <p>Durasi Menginap: <span id="resDurasi"></span> hari</p>
+    <p>Diskon: <span id="resDiskon"></span></p>
+    <p>Total Bayar: <span id="resTotal"></span></p>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      // Menampilkan harga kamar berdasarkan tipe
+      $('#tipeKamar').on('change', function () {
+        var harga = $(this).find(':selected').data('harga');
+        $('#harga').val(harga);
+      });
+
+      // Validasi Nomor Identitas
+      $('#nomorIdentitas').on('input', function () {
+        var identitas = $(this).val();
+        if (identitas.length !== 16 || isNaN(identitas)) {
+          $('#errorIdentitas').text('Isian salah, harus 16 digit');
+        } else {
+          $('#errorIdentitas').text('');
+        }
+      });
+
+      // Validasi Durasi Menginap
+      $('#durasiMenginap').on('input', function () {
+        var durasi = $(this).val();
+        if (isNaN(durasi) || durasi <= 0) {
+          $('#errorDurasi').text('Isian harus angka positif');
+        } else {
+          $('#errorDurasi').text('');
+        }
+      });
+
+      // Menghitung Total Bayar
+      $('#simpan').on('click', function () {
+        var namaPemesan = $('#namaPemesan').val();
+        var nomorIdentitas = $('#nomorIdentitas').val();
+        var jenisKelamin = $('#jenisKelamin').val();
+        var tipeKamar = $('#tipeKamar').val();
+        var hargaKamar = parseInt($('#harga').val());
+        var durasi = parseInt($('#durasiMenginap').val());
+        var breakfast = $('#breakfast').is(':checked');
+        var diskon = durasi > 3 ? 0.1 : 0;
+        var tambahanBreakfast = breakfast ? 80000 : 0;
+
+        if (namaPemesan && nomorIdentitas.length === 16 && !isNaN(durasi)) {
+          var totalBayar = (hargaKamar * durasi) - (hargaKamar * durasi * diskon) + tambahanBreakfast;
+
+          // Tampilkan Resume
+          $('#resNama').text(namaPemesan);
+          $('#resIdentitas').text(nomorIdentitas);
+          $('#resKelamin').text(jenisKelamin);
+          $('#resKamar').text(tipeKamar);
+          $('#resDurasi').text(durasi);
+          $('#resDiskon').text(diskon > 0 ? "10%" : "0%");
+          $('#resTotal').text("Rp " + totalBayar.toLocaleString('id-ID'));
+          $('#resume').show();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
