@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>data nilai</title>
+    <link rel="stylesheet" href="tugascss.css">
+</head>
+
+<body>
+ <div class="container">
+    <h1>DATA KAMAR</h1>
+    <form method="get">
+        <table border="0">    
+          
+            <tr>
+                <td>
+                    <label for="inputText">ID Kamar</label>
+                </td>
+                <td>
+                    <input type="number" id="nama" name="nama" maxlength="35" min="5" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="inputText">Gambar ruangan</label>
+                </td>
+                <td>
+                    <input type="file" id="nim" name="nim" value="file"    pattern="[0-9]" required>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="inputText">jenis Kamar</label>
+                </td>
+                <td>
+                    <select name="" id="">
+                        <option value="">Double</option>
+                        <option value="">single</option>
+                    </select>
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="inputText">Harga</label>
+                </td>
+                <td>
+                    <input type="text" id="nama" name="nama" maxlength="35" min="5" required />
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <label for="inputText">Fasilitas</label>
+                </td>
+                <td>
+                    <select name="" id="">
+                        <option value="">WIFI</option>
+                        <option value="">AC</option>
+                        <option value="">TV</option>
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                        <input type="submit" value="SIMPAN" required style="background-color: blue; color: white;">
+                </td>
+                <td>
+                    <input type="submit" value="BATAL" style="background-color: orange; color: black;" >
+            </td>
+            </tr>
+            
+        </table>
+    </form>
+</div>
+</body>
+
+</html>

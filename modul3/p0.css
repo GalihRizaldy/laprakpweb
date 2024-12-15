@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.artikel {
+    display: flex;
+    align-items: flex-start;
+    border: 1px solid #ddd;
+    padding: 16px;
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+
+.gambar {
+    width: 150px;
+    height: auto;
+    margin-right:16px ;
+}
+
