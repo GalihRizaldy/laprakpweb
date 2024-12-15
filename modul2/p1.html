@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form input data mahasiswa</title>
+</head>
+<body>
+    <h1>form input data mahasiswa</h1>
+    <form method="get" action="p2.html">
+        <table border="0">
+            <tr>
+                <td>
+                    <label for="inputText">nomor induk mahasiswa</label>
+                </td>
+                <td>
+                    <input type="number" id="nim" name="nim" pattern="[0-9]" required>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">Nama</label>
+                </td>
+                <td>
+                    <input type="text" id="nama" name="nama" maxlength="35" min="5" size="50" required/>
+                    <span>harus karakter 5-35</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">password</label>
+                </td>
+                <td>
+                <input type="password" id="pass" name="pass" maxlength="20" min="5" size="40">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">nomor telphone</label>
+                </td>
+                <td>
+                    <input type="tel" id="telp" name="telp" maxlength="12">
+                    <span>harus 10-12</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">tanggal lahir</label>
+                </td>
+                <td>
+                    <input type="date" id="tgl" name="tgl" required/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">E-mail</label>
+                </td>
+                <td>
+                    <input type="email" id="mail" name="mail"required/>
+                    <span>harus 10-12</span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="inputText">alamat</label>
+                </td>
+                <td>
+                    <textarea name="alamat" id="" cols="35" rows="5"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <button name="save" value="simpan">Simpan</button>
+                    <button type="reset" name="cancel" value="batal">Batal</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
