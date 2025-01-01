@@ -1,1 +1,1 @@
-# modul6
+Laporan praktikum galig rizaldy
