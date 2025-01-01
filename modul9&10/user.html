@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking Form</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f4; /* Warna background */
+        }
+        .table-container {
+            background-color: white; /* Warna latar belakang tabel */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+        table {
+            font-size: 14px; /* Ukuran font lebih kecil */
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <div>
+            <h1 class="text-center mb-4">Form Pemesanan Hotel</h1>
+        </div>
+        <div class="container p-4 shadow-sm" style="background-color: #f9f9f9; max-width: 500px;">
+        
+            <form id="hotelBookingForm">
+                <!-- Form Inputs -->
+                <div class="mb-3">
+                    <label for="namaPemesan" class="form-label">Nama Pemesan</label>
+                    <input type="text" class="form-control" id="namaPemesan" name="nama" placeholder="Masukkan nama pemesan" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenisKelamin" id="lakiLaki" value="Laki-Laki" required>
+                        <label class="form-check-label" for="lakiLaki">Laki-Laki</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="jenisKelamin" id="perempuan" value="Perempuan" required>
+                        <label class="form-check-label" for="perempuan">Perempuan</label>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="nomorIdentitas" class="form-label">Nomor Identitas</label>
+                    <input type="text" class="form-control" id="nomorIdentitas" name="nomorIdentitas" placeholder="Masukkan 16 digit nomor identitas" maxlength="16" required>
+                    <div class="invalid-feedback">Isian salah, harus 16 digit</div>
+                </div>
+                <div class="mb-3">
+                    <label for="tipeKamar" class="form-label">Tipe Kamar</label>
+                    <select class="form-select" id="tipeKamar" name="tipeKamar" required>
+                        <option value="">Pilih Tipe Kamar</option>
+                        <option value="Standar" data-harga="300000">Standar (300,000)</option>
+                        <option value="Deluxe" data-harga="500000">Deluxe (500,000)</option>
+                        <option value="Family" data-harga="700000">Family (700,000)</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="tanggalPesan" class="form-label">Tanggal Pesan</label>
+                    <input type="date" class="form-control" id="tanggalPesan" name="tanggalPesan" required>
+                </div>
+                <div class="mb-3">
+                    <label for="durasiMenginap" class="form-label">Durasi Menginap (Hari)</label>
+                    <input type="number" class="form-control" id="durasiMenginap" name="durasiMenginap" placeholder="Masukkan durasi menginap" required>
+                    <div class="invalid-feedback">Isian harus berupa angka</div>
+                </div>
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="breakfast" name="breakfast">
+                    <label class="form-check-label" for="breakfast">Termasuk Breakfast (Tambahan Rp 80,000)</label>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="calculateTotal()">Simpan</button>
+            </form>
+    
+            <div class="mt-5 table-container">
+                <h3 class="text-center">Resume Pemesanan</h3>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Nama Pemesan</th>
+                            <th>Nomor Identitas</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Tipe Kamar</th>
+                            <th>Durasi</th>
+                            <th>Diskon</th>
+                            <th>Total Bayar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resumeTable">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+    </div>
+    
+    <script>
+        function calculateTotal() {
+            const nama = document.getElementById('namaPemesan').value;
+            const jenisKelamin = document.querySelector('input[name="jenisKelamin"]:checked')?.value;
+            const nomorIdentitas = document.getElementById('nomorIdentitas').value;
+            const tipeKamar = document.getElementById('tipeKamar');
+            const hargaKamar = parseInt(tipeKamar.options[tipeKamar.selectedIndex].getAttribute('data-harga')) || 0;
+            const durasiMenginap = parseInt(document.getElementById('durasiMenginap').value) || 0;
+            const breakfast = document.getElementById('breakfast').checked;
+
+            if (nomorIdentitas.length !== 16) {
+                document.getElementById('nomorIdentitas').classList.add('is-invalid');
+                return;
+            } else {
+                document.getElementById('nomorIdentitas').classList.remove('is-invalid');
+            }
+
+            let totalBayar = hargaKamar * durasiMenginap;
+            let diskon = 0;
+
+            if (durasiMenginap > 3) {
+                diskon = totalBayar * 0.1;
+                totalBayar -= diskon;
+            }
+
+            if (breakfast) {
+                totalBayar += 80000;
+            }
+
+            const tableRow = `
+                <tr>
+                    <td>${nama}</td>
+                    <td>${nomorIdentitas}</td>
+                    <td>${jenisKelamin}</td>
+                    <td>${tipeKamar.value}</td>
+                    <td>${durasiMenginap} hari</td>
+                    <td>Rp ${diskon.toLocaleString()}</td>
+                    <td>Rp ${totalBayar.toLocaleString()}</td>
+                </tr>
+            `;
+
+            document.getElementById('resumeTable').innerHTML = tableRow;
+        }
+    </script>
+</body>
+</html>
